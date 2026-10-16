@@ -1,0 +1,257 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} 智能控制中心 {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <style>
+    .stats-card {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border: 1px solid rgba(102, 126, 234, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+    }
+    
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .chart-container {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chart-container:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--success-gradient);
+    }
+    
+    .info-card {
+      background: linear-gradient(135deg, rgba(67, 233, 123, 0.1) 0%, rgba(56, 249, 215, 0.1) 100%);
+      border: 1px solid rgba(67, 233, 123, 0.2);
+    }
+    
+    .author-link {
+      color: #4facfe;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .author-link:hover {
+      color: #00f2fe;
+      text-decoration: none;
+      text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+    }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!-- 欢迎横幅 -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel glass-effect" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border: 1px solid rgba(102, 126, 234, 0.2);">
+          <div class="x_content" style="text-align: center; padding: 40px;">
+            <h1 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 10px;">
+              <i class="fa fa-rocket"></i> 欢迎使用智能视频分析平台
+            </h1>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); margin: 0;">
+              基于人工智能的实时视频监控与行为分析系统
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 统计卡片 -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="x_panel stats-card">
+          <div class="x_content" style="text-align: center; padding: 30px;">
+            <div class="stats-number" id="online_cameras">0</div>
+            <p style="color: var(--text-secondary); margin: 10px 0 0 0; font-weight: 600;">
+              <i class="fa fa-video-camera"></i> 在线摄像头
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="x_panel stats-card">
+          <div class="x_content" style="text-align: center; padding: 30px;">
+            <div class="stats-number" id="total_alarms">0</div>
+            <p style="color: var(--text-secondary); margin: 10px 0 0 0; font-weight: 600;">
+              <i class="fa fa-exclamation-triangle"></i> 今日报警
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="x_panel stats-card">
+          <div class="x_content" style="text-align: center; padding: 30px;">
+            <div class="stats-number" id="active_algorithms">0</div>
+            <p style="color: var(--text-secondary); margin: 10px 0 0 0; font-weight: 600;">
+              <i class="fa fa-microchip"></i> 活跃算法
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="x_panel stats-card">
+          <div class="x_content" style="text-align: center; padding: 30px;">
+            <div class="stats-number" id="system_uptime">99.9%</div>
+            <p style="color: var(--text-secondary); margin: 10px 0 0 0; font-weight: 600;">
+              <i class="fa fa-check-circle"></i> 系统可用性
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- 系统信息 -->
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><i class="fa fa-server"></i> 系统状态</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td><i class="fa fa-clock-o"></i> 运行时间</td>
+                  <td><span class="gradient-text" id="os_run_date_str">00:00:00</span></td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-microchip"></i> CPU使用率</td>
+                  <td>
+                    <span id="os_cpu_used_rate">0%</span>
+                    <div class="progress" style="height: 6px; margin-top: 5px;">
+                      <div class="progress-bar" style="background: var(--success-gradient);" id="cpu_progress"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-memory"></i> 内存使用率</td>
+                  <td>
+                    <span id="os_virtual_mem_used_rate">0%</span>
+                    <div class="progress" style="height: 6px; margin-top: 5px;">
+                      <div class="progress-bar" style="background: var(--warning-gradient);" id="memory_progress"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-hdd-o"></i> 存储使用率</td>
+                  <td>
+                    <span id="os_disk_used_rate">0%</span>
+                    <div class="progress" style="height: 6px; margin-top: 5px;">
+                      <div class="progress-bar" style="background: var(--danger-gradient);" id="disk_progress"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 开发者信息 -->
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="x_panel info-card">
+          <div class="x_title">
+            <h2><i class="fa fa-info-circle"></i> 开发者信息</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div style="text-align: center; padding: 20px;">
+              <div style="margin-bottom: 20px;">
+                <i class="fa fa-user-circle" style="font-size: 4rem; color: #4facfe;"></i>
+              </div>
+              <h4 class="gradient-text">hhh</h4>
+           </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快速操作 -->
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><i class="fa fa-bolt"></i> 快速操作</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div style="padding: 20px;">
+              <a href="/stream/add" class="btn btn-primary btn-block" style="margin-bottom: 15px;">
+                <i class="fa fa-plus"></i> 添加摄像头
+              </a>
+              <a href="/alarms" class="btn btn-warning btn-block" style="margin-bottom: 15px;">
+                <i class="fa fa-bell"></i> 查看报警
+              </a>
+              <a href="/algorithms" class="btn btn-success btn-block" style="margin-bottom: 15px;">
+                <i class="fa fa-cogs"></i> 算法管理
+              </a>
+              <a href="/stream/online" class="btn btn-info btn-block">
+                <i class="fa fa-play"></i> 实时监控
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <script>
+    // 模拟数据更新
+    function updateStats() {
+      document.getElementById('online_cameras').textContent = Math.floor(Math.random() * 20) + 5;
+      document.getElementById('total_alarms').textContent = Math.floor(Math.random() * 50);
+      document.getElementById('active_algorithms').textContent = Math.floor(Math.random() * 10) + 3;
+      
+      // 更新进度条
+      const cpuUsage = Math.floor(Math.random() * 100);
+      const memUsage = Math.floor(Math.random() * 100);
+      const diskUsage = Math.floor(Math.random() * 100);
+      
+      document.getElementById('os_cpu_used_rate').textContent = cpuUsage + '%';
+      document.getElementById('os_virtual_mem_used_rate').textContent = memUsage + '%';
+      document.getElementById('os_disk_used_rate').textContent = diskUsage + '%';
+      
+      document.getElementById('cpu_progress').style.width = cpuUsage + '%';
+      document.getElementById('memory_progress').style.width = memUsage + '%';
+      document.getElementById('disk_progress').style.width = diskUsage + '%';
+    }
+    
+    // 页面加载完成后开始更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateStats();
+      setInterval(updateStats, 5000); // 每5秒更新一次
+    });
+  </script>
+{% endblock javascripts %}

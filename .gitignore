@@ -1,0 +1,76 @@
+# Local application configuration and secrets
+config.json
+.env
+.env.*
+!.env.example
+
+# Runtime uploads, recordings, and generated media
+Admin/static/upload/**
+!Admin/static/upload/.gitkeep
+*.mp4
+*.avi
+*.mkv
+*.flv
+*.mov
+*.ts
+*.m3u8
+
+# Runtime state and logs
+*.log
+*.pid
+*.sqlite3
+*.db
+nohup.out
+core.*
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+venv*/
+
+# IDE and user-specific files
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# C/C++ and CMake build output
+Analyzer/build/
+Analyzer/Analyzer/x64/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.out
+*.ilk
+*.pdb
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Non-project application materials
+软件著作权申请资料/
+软著模板/
+软著模版/

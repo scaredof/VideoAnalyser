@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    {% block head %}
+      {% block meta %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="/static/images/favicon.ico">
+      {% endblock meta %}
+
+      <title>🚀 智能视频分析平台 | {% block title %}{% endblock %}</title>
+
+      {% block stylesheets %}
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="/static/lib/bootstrap/css/bootstrap.css?v=1" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="/static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="/static/vendors/nprogress/nprogress.css" rel="stylesheet">
+        <!-- Modern Theme Simple -->
+        <link href="/static/build/css/modern-theme-simple.css?v=2" rel="stylesheet">
+        <!-- Table Fix -->
+        <link href="/static/build/css/modern-theme-table-fixed.css?v=1" rel="stylesheet">
+        <!-- Form Fix -->
+        <link href="/static/build/css/form-fix.css?v=1" rel="stylesheet">
+	<!-- Player Fix -->
+	<link href="/static/build/css/player-fix.css?v=1" rel="stylesheet">
+
+      {% endblock stylesheets %}
+
+    {% endblock head %}
+  </head>
+
+  <body class="{% block body_class %}nav-md modern-theme{% endblock body_class %}">
+    {% block body %}
+      <div class="container body">
+        <div class="main_container">
+
+          {% block sidebar %}
+            <div class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}">
+              {% include "app/sidebar.html" %}
+            </div>
+          {% endblock sidebar %}
+
+          {% block top_navigation %}
+            <div class="top_nav">
+              {% include "app/top_navigation.html" %}
+            </div>
+          {% endblock top_navigation %}
+
+          {% block content %}
+            <!-- {{ content }} -->
+          {% endblock content %}
+
+          {% block footer %}
+            <footer>
+              {% include "app/footer.html" %}
+            </footer>
+          {% endblock footer %}
+        </div>
+      </div>
+
+      {% block javascripts %}
+        <!-- jQuery -->
+        <script src="/static/lib/jquery/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="/static/vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="/static/vendors/nprogress/nprogress.js"></script>
+        <!-- Enhanced Sidebar -->
+        <script src="/static/build/js/sidebar-enhanced.js?v=1"></script>
+        
+        <script>
+        // 消息提示函数
+        function myAlert(message, type, duration) {
+            duration = duration || 3000;
+            
+            // 移除已存在的提示
+            $('.alert-message').remove();
+            
+            // 创建提示元素
+            var alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+            var iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            
+            var alertHtml = '<div class="alert-message ' + alertClass + '" style="position: fixed; top: 20px; right: 20px; z-index: 9999; padding: 15px 20px; border-radius: 8px; color: white; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: slideInRight 0.3s ease-out;">' +
+                '<i class="fa ' + iconClass + '" style="margin-right: 8px;"></i>' + message +
+                '</div>';
+            
+            $('body').append(alertHtml);
+            
+            // 设置背景色
+            if (type === 'success') {
+                $('.alert-message').css('background', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)');
+            } else {
+                $('.alert-message').css('background', 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)');
+            }
+            
+            // 自动移除
+            setTimeout(function() {
+                $('.alert-message').fadeOut(300, function() {
+                    $(this).remove();
+                });
+            }, duration);
+        }
+        
+        // 添加CSS动画
+        if (!$('#alert-animations').length) {
+            $('<style id="alert-animations">').text(`
+                @keyframes slideInRight {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `).appendTo('head');
+        }
+        </script>
+      {% endblock %}
+
+    {% endblock body %}
+  </body>
+</html>

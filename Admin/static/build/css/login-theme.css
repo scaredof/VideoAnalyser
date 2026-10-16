@@ -1,0 +1,284 @@
+/* 登录页面专用样式 */
+
+/* 完全重置登录页面的html和body */
+html.login-page, 
+body.login {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+}
+
+/* 完全隐藏所有基础模板元素 */
+body.login .container.body,
+body.login .main_container,
+body.login .left_col,
+body.login .top_nav,
+body.login footer,
+body.login .col-md-3,
+body.login .sidebar,
+body.login .nav,
+body.login .navbar {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 登录页面主体样式 */
+body.login {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* 登录容器 - 修复宽度问题 */
+.login_wrapper {
+  width: 400px;
+  max-width: 90vw;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 登录表单容器 */
+.login_form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: slideUp 0.6s ease-out;
+  position: relative;
+  z-index: 1001;
+  width: 100%;
+}
+
+/* 登录内容区域 */
+.login_content {
+  padding: 40px 30px;
+  text-align: center;
+}
+
+/* 标题样式 */
+.login_content h1 {
+  color: #2d3748;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  text-shadow: none;
+}
+
+/* 副标题样式 */
+.login_content p {
+  color: #718096;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+/* 表单组样式 */
+.login_content > div {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* 输入框样式 */
+.login_content .form-control {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #ffffff;
+  color: #2d3748;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.login_content .form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.login_content .form-control::placeholder {
+  color: #a0aec0;
+  font-weight: 400;
+}
+
+/* 登录按钮样式 */
+.login_content .btn.submit {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin: 10px 0;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  cursor: pointer;
+}
+
+.login_content .btn.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  text-decoration: none;
+  color: white;
+}
+
+.login_content .btn.submit:active {
+  transform: translateY(0);
+}
+
+/* 分隔线样式 */
+.separator {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.separator p {
+  color: #718096;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 验证码样式 */
+#verify-code {
+  float: right;
+  display: block;
+  width: 90px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#verify-code:hover {
+  border-color: #667eea;
+  transform: scale(1.05);
+}
+
+/* 清除浮动 */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* 动画效果 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .login_wrapper {
+    width: 320px;
+    max-width: 95vw;
+    padding: 10px;
+  }
+  
+  .login_content {
+    padding: 30px 20px;
+  }
+  
+  .login_content h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .login_content .form-control {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .login_content .btn.submit {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login_wrapper {
+    width: 280px;
+    max-width: 95vw;
+  }
+  
+  .login_content {
+    padding: 25px 15px;
+  }
+}
+
+/* 添加背景动画效果 */
+body.login::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 确保没有任何滚动 */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+body.login * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 强制隐藏所有可能的滚动条 */
+body.login::-webkit-scrollbar {
+  display: none;
+}
+
+body.login {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

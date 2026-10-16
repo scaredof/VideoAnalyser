@@ -1,0 +1,271 @@
+/* 表单控件修复样式 */
+
+/* 修复选择框文字被截断的问题 */
+.select2_single,
+.form-control select,
+select.form-control {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  color: var(--text-primary) !important;
+  padding: 10px 15px !important;
+  height: auto !important;
+  min-height: 42px !important;
+  line-height: 1.5 !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+}
+
+.select2_single:focus,
+.form-control select:focus,
+select.form-control:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1) !important;
+  outline: none !important;
+  color: var(--text-primary) !important;
+}
+
+/* 选择框选项样式 */
+.select2_single option,
+.form-control select option,
+select.form-control option {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  padding: 8px 12px !important;
+  line-height: 1.5 !important;
+  font-size: 14px !important;
+}
+
+.select2_single option:hover,
+.form-control select option:hover,
+select.form-control option:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
+}
+
+.select2_single option:selected,
+.form-control select option:selected,
+select.form-control option:selected {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+}
+
+/* 修复Select2插件样式 */
+.select2-container {
+  width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  height: 42px !important;
+  line-height: 40px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  color: var(--text-primary) !important;
+  padding-left: 15px !important;
+  padding-right: 30px !important;
+  font-size: 14px !important;
+  line-height: 40px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__placeholder {
+  color: var(--text-muted) !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__arrow {
+  height: 40px !important;
+  right: 10px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__arrow b {
+  border-color: var(--text-secondary) transparent transparent transparent !important;
+  border-style: solid !important;
+  border-width: 5px 4px 0 4px !important;
+  height: 0 !important;
+  left: 50% !important;
+  margin-left: -4px !important;
+  margin-top: -2px !important;
+  position: absolute !important;
+  top: 50% !important;
+  width: 0 !important;
+}
+
+.select2-container--default .select2-selection--single:focus {
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1) !important;
+}
+
+/* 下拉菜单样式 */
+.select2-dropdown {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.select2-results__option {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  padding: 10px 15px !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.select2-results__option:hover,
+.select2-results__option--highlighted {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
+}
+
+.select2-results__option[aria-selected="true"] {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+}
+
+/* 搜索框样式 */
+.select2-search--dropdown .select2-search__field {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  color: var(--text-primary) !important;
+  padding: 8px 12px !important;
+  margin: 10px !important;
+  width: calc(100% - 20px) !important;
+}
+
+.select2-search--dropdown .select2-search__field:focus {
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.1) !important;
+  outline: none !important;
+}
+
+/* 表单标签样式 */
+.control-label {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin-bottom: 5px !important;
+}
+
+/* 表单组样式 */
+.form-group {
+  margin-bottom: 20px !important;
+}
+
+/* 输入框样式增强 */
+.form-control {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  color: var(--text-primary) !important;
+  padding: 10px 15px !important;
+  transition: all 0.3s ease !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  height: auto !important;
+  min-height: 42px !important;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1) !important;
+  outline: none !important;
+  color: var(--text-primary) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted) !important;
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+  background: rgba(255, 255, 255, 0.02) !important;
+  color: var(--text-muted) !important;
+  cursor: not-allowed !important;
+}
+
+/* 文本域样式 */
+textarea.form-control {
+  min-height: 80px !important;
+  resize: vertical !important;
+}
+
+/* 单选按钮和复选框样式 */
+.radio,
+.checkbox {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.radio label,
+.checkbox label {
+  color: var(--text-secondary) !important;
+  font-weight: normal !important;
+  cursor: pointer !important;
+  padding-left: 25px !important;
+  position: relative !important;
+}
+
+.radio input[type="radio"],
+.checkbox input[type="checkbox"] {
+  position: absolute !important;
+  left: 0 !important;
+  top: 3px !important;
+  margin: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* 数字输入框样式 */
+input[type="number"].form-control {
+  -moz-appearance: textfield !important;
+}
+
+input[type="number"].form-control::-webkit-outer-spin-button,
+input[type="number"].form-control::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* URL输入框样式 */
+input[type="url"].form-control {
+  font-family: monospace !important;
+}
+
+/* 表单水平布局优化 */
+.form-horizontal .form-group {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.form-horizontal .control-label {
+  text-align: right !important;
+  padding-top: 11px !important;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .form-horizontal .control-label {
+    text-align: left !important;
+    padding-top: 0 !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .select2-container .select2-selection--single {
+    height: 38px !important;
+    line-height: 36px !important;
+  }
+  
+  .select2-container .select2-selection--single .select2-selection__rendered {
+    line-height: 36px !important;
+  }
+  
+  .select2-container .select2-selection--single .select2-selection__arrow {
+    height: 36px !important;
+  }
+}

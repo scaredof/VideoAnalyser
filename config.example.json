@@ -1,0 +1,15 @@
+{
+  "version": "3.49",
+  "host": "127.0.0.1",
+  "videoAnalyzerPort": 9000,
+  "adminPort": 9001,
+  "mediaHttpPort": 80,
+  "analyzerPort": 9003,
+  "mediaRtspPort": 554,
+  "mediaSecret": "replace-with-your-media-server-secret",
+  "uploadDir": "path/to/Admin/static/upload",
+  "modelDir": "path/to/Analyzer/models",
+  "recordLogInterval": 30,
+  "workerConcurrency": 20,
+  "algorithmApiUrl": "http://127.0.0.1:8070/receiveImageLLMVL"
+}

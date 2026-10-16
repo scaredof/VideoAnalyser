@@ -1,0 +1,92 @@
+<div class="nav_menu glass-effect">
+  <nav>
+    <div class="nav toggle">
+      <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+    </div>
+
+    <div class="navbar-header">
+      <span class="gradient-text" style="font-size: 16px; font-weight: 600; margin-left: 20px;">
+        <i class="fa fa-chart-line"></i> 实时监控系统
+      </span>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <!-- 系统状态指示器 -->
+      <li class="dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-server"></i>
+          <span class="status-indicator status-online"></span>
+          系统状态
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-usermenu pull-right">
+          <li><a href="#"><i class="fa fa-check text-success"></i> 系统正常运行</a></li>
+          <li><a href="#"><i class="fa fa-database"></i> 数据库连接正常</a></li>
+          <li><a href="#"><i class="fa fa-wifi"></i> 网络连接正常</a></li>
+        </ul>
+      </li>
+
+      <!-- 通知中心 -->
+      <li class="dropdown">
+        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-bell"></i>
+          <span class="badge bg-green">3</span>
+        </a>
+        <ul class="dropdown-menu list-unstyled msg_list" role="menu">
+          <li>
+            <a>
+              <span class="image">
+                <i class="fa fa-exclamation-triangle text-warning"></i>
+              </span>
+              <span>
+                <span>异常检测</span>
+                <span class="time">2分钟前</span>
+              </span>
+              <span class="message">
+                摄像头#001检测到异常行为
+              </span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <span class="image">
+                <i class="fa fa-info-circle text-info"></i>
+              </span>
+              <span>
+                <span>系统更新</span>
+                <span class="time">10分钟前</span>
+              </span>
+              <span class="message">
+                算法模型已更新至最新版本
+              </span>
+            </a>
+          </li>
+          <li>
+            <div class="text-center">
+              <a href="/alarms">
+                <strong>查看所有通知</strong>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 用户菜单 -->
+      <li class="">
+        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <img src="/static/images/user.png" alt="" style="border-radius: 50%; width: 26px; height: 26px;">
+          <span class="gradient-text">管理员</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-usermenu pull-right">
+          <li><a href="/profile"><i class="fa fa-user pull-right"></i> 个人资料</a></li>
+          <li><a href="#"><i class="fa fa-cog pull-right"></i> 系统设置</a></li>
+          <li><a href="#"><i class="fa fa-question-circle pull-right"></i> 帮助中心</a></li>
+          <li class="divider"></li>
+          <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> 安全退出</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

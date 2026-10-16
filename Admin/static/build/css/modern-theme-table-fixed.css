@@ -1,0 +1,235 @@
+/* 表格样式修复 - 解决斑马纹文字看不清的问题 */
+
+/* 覆盖原有的表格样式 */
+.table {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 20px;
+}
+
+/* 表头样式 */
+.table th,
+.table thead th {
+  color: var(--text-primary) !important;
+  background: var(--card-bg) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+  border-top: none !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 15px 12px;
+}
+
+/* 表格单元格基础样式 */
+.table td,
+.table tbody td {
+  color: var(--text-secondary) !important;
+  border-top: 1px solid var(--border-color) !important;
+  border-bottom: none !important;
+  padding: 12px;
+  vertical-align: middle;
+}
+
+/* 修复斑马纹样式 - 确保所有行都有合适的背景和文字颜色 */
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > td {
+  color: var(--text-secondary) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) > td {
+  color: var(--text-secondary) !important;
+}
+
+/* 悬停效果 */
+.table-hover > tbody > tr:hover {
+  background: var(--hover-bg) !important;
+}
+
+.table-hover > tbody > tr:hover > td {
+  color: var(--text-primary) !important;
+}
+
+/* 边框表格样式 */
+.table-bordered {
+  border: 1px solid var(--border-color) !important;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid var(--border-color) !important;
+}
+
+/* 特殊表格类 */
+.jambo_table {
+  background: transparent !important;
+}
+
+.jambo_table th,
+.jambo_table td {
+  color: var(--text-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.jambo_table thead th {
+  color: var(--text-primary) !important;
+  background: var(--card-bg) !important;
+}
+
+/* 表格内的链接样式 */
+.table a,
+.table .sun-a-label {
+  color: #4facfe !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.table a:hover,
+.table .sun-a-label:hover {
+  color: #00f2fe !important;
+  text-decoration: none;
+}
+
+/* 表格内的标签样式 */
+.table .label {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.table .label-success {
+  background: var(--success-gradient) !important;
+  color: white !important;
+}
+
+.table .label-default {
+  background: var(--hover-bg) !important;
+  color: var(--text-secondary) !important;
+}
+
+.table .label-warning {
+  background: var(--warning-gradient) !important;
+  color: white !important;
+}
+
+.table .label-danger {
+  background: var(--danger-gradient) !important;
+  color: white !important;
+}
+
+.table .label-info {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+}
+
+/* 表格内的按钮样式 */
+.table .btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.table .layui-btn {
+  background: var(--danger-gradient) !important;
+  color: white !important;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.table .layui-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+/* 表格响应式 */
+.table-responsive {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--card-bg);
+  overflow-x: auto;
+}
+
+/* 修复表格内的图标 */
+.table i.fa {
+  margin-right: 5px;
+  color: inherit;
+}
+
+/* 表格加载状态 */
+.table .top_loading_img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+/* 表格内的表单元素 */
+.table input,
+.table select,
+.table textarea {
+  background: var(--darker-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.table input:focus,
+.table select:focus,
+.table textarea:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+  outline: none;
+}
+
+/* 确保所有文字都可见 */
+.table * {
+  color: inherit !important;
+}
+
+/* 特殊情况：确保白色背景行的文字可见 */
+.table tr[style*="background"] td,
+.table tr[style*="background-color"] td {
+  color: var(--text-secondary) !important;
+}
+
+/* 针对可能的内联样式覆盖 */
+.table tbody tr {
+  background: transparent !important;
+}
+
+.table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 强制文字颜色 */
+.table tbody tr td,
+.table tbody tr td * {
+  color: var(--text-secondary) !important;
+}
+
+.table tbody tr:hover td,
+.table tbody tr:hover td * {
+  color: var(--text-primary) !important;
+}

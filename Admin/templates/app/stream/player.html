@@ -1,0 +1,177 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} 播放器 {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Player Fix CSS -->
+  <link href="/static/build/css/player-fix.css?v=1" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-play-circle"></i> 视频播放器</h2>
+              <div class="clearfix"></div>
+            </div>
+            
+            <div class="player-container">
+              <!-- 播放器控制区域 -->
+              <div class="player-controls">
+                <label style="margin: 0; flex: 1;">
+                  <input id="input_address" type="text" placeholder="请输入播放地址（支持ws-fmp4/http-fmp4）">
+                </label>
+                <button type="button" class="btn btn-success btn-sm" onclick="f_clickPlayStart()">
+                  <i class="fa fa-play"></i> 播放
+                </button>
+                <button type="button" class="btn btn-default btn-sm" onclick="f_clickPlayStop()">
+                  <i class="fa fa-stop"></i> 停止
+                </button>
+              </div>
+
+              <!-- 视频播放区域 -->
+              <div class="player-video-wrapper">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+                  <video id="video_player" poster="/static/images/player_poster.jpg" muted controls autoplay>
+                    Your browser is too old which doesn't support HTML5 video.
+                  </video>
+                </div>
+              </div>
+
+              <!-- 视频信息区域 -->
+              {% if is_exist_stream %}
+              <div class="video-info">
+                <p><i class="fa fa-info-circle"></i> 视频流支持的所有转发协议</p>
+                <p><strong>WebSocket MP4:</strong> {{ stream.wsMp4Url }}</p>
+                <p><strong>WebSocket FLV:</strong> {{ stream.wsFlvUrl }}</p>
+                <p><strong>HTTP MP4:</strong> {{ stream.httpMp4Url }}</p>
+                <p><strong>HTTP FLV:</strong> {{ stream.httpFlvUrl }}</p>
+                <p><strong>RTSP:</strong> {{ stream.rtspUrl }}</p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+
+<script src="/static/lib/wsPlayer/mp4box.all.min.js"></script>
+<script src="/static/lib/wsPlayer/wsPlayer.js"></script>
+<script>
+    let mWsVideoPlayer = null;
+    let eleVideoPlayerJqueryObj = $("#video_player");
+    let eleInputAddress= $("#input_address");
+    let mVideoUrl = null;
+    
+    function f_playStart(video_url) {
+        mVideoUrl = video_url;
+        if(mVideoUrl.startsWith("ws://")){
+            if(mWsVideoPlayer){
+                try {
+                    mWsVideoPlayer.close();
+                }catch (e) {
+                    console.log("f_playStart() err:",e);
+                }
+            }
+            mWsVideoPlayer = new wsPlayer("video_player", mVideoUrl);
+            mWsVideoPlayer.open();
+        }else if(mVideoUrl.startsWith("http://")){
+            eleVideoPlayerJqueryObj.attr("src",mVideoUrl);
+        }
+    }
+    
+    function f_playStop() {
+        if(mVideoUrl && mVideoUrl.startsWith("ws://")){
+            if(mWsVideoPlayer){
+                mWsVideoPlayer.close();
+                mWsVideoPlayer = null;
+                eleVideoPlayerJqueryObj.removeAttr("src");
+                eleVideoPlayerJqueryObj.load();
+            }
+        }else if(mVideoUrl && mVideoUrl.startsWith("http://")){
+            eleVideoPlayerJqueryObj.removeAttr("src");
+            eleVideoPlayerJqueryObj.load();
+        }
+    }
+    
+    function f_clickPlayStart() {
+        let video_url = eleInputAddress.val().trim();
+
+        if(video_url === "" || typeof video_url === "undefined"){
+            myAlert("请输入播放地址（支持ws-fmp4/http-fmp4）！","error");
+            return false;
+        }
+
+        if(!video_url.endsWith(".mp4")){
+            myAlert("视频流地址格式不正确！","error");
+            return false;
+        }
+        
+        if(video_url.startsWith("ws://") || video_url.startsWith("http://")){
+            // 更新按钮状态
+            $('.btn-success').html('<i class="fa fa-spinner fa-spin"></i> 连接中...');
+            $('.btn-success').prop('disabled', true);
+            
+            f_playStart(video_url);
+            
+            // 恢复按钮状态
+            setTimeout(function() {
+                $('.btn-success').html('<i class="fa fa-play"></i> 播放');
+                $('.btn-success').prop('disabled', false);
+            }, 2000);
+            
+            myAlert("开始播放视频流", "success");
+        }else{
+             myAlert("视频流地址格式不正确！","error");
+             return false;
+        }
+    }
+    
+	function f_clickPlayStop() {
+        f_playStop();
+        myAlert("已停止播放", "success");
+    }
+
+    $(function() {
+        let is_exist_stream = parseInt("{{ is_exist_stream }}");
+        if(is_exist_stream){
+            let is_online = parseInt("{{ stream.is_online }}");
+            let video_codec_name = "{{ stream.video_codec_name }}";
+            let video_width = parseInt("{{ stream.video_width }}");
+            let video_height = parseInt("{{ stream.video_height }}");
+            let app = "{{ stream.app }}";
+            let name = "{{ stream.name }}";
+            let wsHost = "{{ stream.wsHost }}";
+            let wsMp4Url = "{{ stream.wsMp4Url }}";
+
+            let video_url = wsMp4Url; // 默认使用WebSocket MP4地址
+            eleInputAddress.val(video_url);
+            
+            // 自动播放（可选）
+            // f_playStart(video_url);
+        }
+        
+        // 回车键播放
+        eleInputAddress.on('keypress', function(e) {
+            if (e.which === 13) {
+                f_clickPlayStart();
+            }
+        });
+        
+        // 输入框焦点效果
+        eleInputAddress.on('focus', function() {
+            $(this).select();
+        });
+    });
+</script>
+
+{% endblock javascripts %}

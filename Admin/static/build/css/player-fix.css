@@ -1,0 +1,189 @@
+/* 播放器界面布局修复 */
+
+/* 播放器控制区域样式 */
+.player-controls {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* 播放器输入框样式修复 */
+#input_address {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  color: var(--text-primary) !important;
+  padding: 10px 15px !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  height: 42px !important;
+  line-height: 1.5 !important;
+  width: 400px !important;
+  margin-left: 0 !important;
+  transition: all 0.3s ease !important;
+  -webkit-appearance: none !important;
+  box-sizing: border-box !important;
+}
+
+#input_address:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1) !important;
+  outline: none !important;
+  color: var(--text-primary) !important;
+}
+
+#input_address::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* 播放器按钮样式 */
+.player-controls .btn {
+  height: 42px !important;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: var(--border-radius) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  margin-left: 0 !important;
+}
+
+.player-controls .btn i {
+  margin-right: 5px !important;
+}
+
+.player-controls .btn-success {
+  background: var(--success-gradient) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.player-controls .btn-success:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4) !important;
+  color: white !important;
+}
+
+.player-controls .btn-default {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.player-controls .btn-default:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: var(--text-primary) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* 视频播放器样式 */
+#video_player {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 550px !important;
+  background-color: #000 !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+#video_player:focus {
+  outline: none !important;
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1) !important;
+}
+
+/* 视频信息区域 */
+.video-info {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid var(--border-color);
+  margin-top: 20px;
+  border-radius: var(--border-radius);
+}
+
+.video-info p {
+  color: var(--text-secondary) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin: 8px 0 !important;
+  padding: 8px 12px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 6px !important;
+  border-left: 3px solid #4facfe !important;
+  font-family: 'Courier New', monospace !important;
+  word-break: break-all !important;
+}
+
+.video-info p:first-of-type {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  background: var(--primary-gradient) !important;
+  color: white !important;
+  border-left: none !important;
+  font-family: inherit !important;
+}
+
+/* 播放器容器对齐 */
+.player-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.player-video-wrapper {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .player-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  #input_address {
+    width: 100% !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .player-controls .btn {
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+  
+  .video-info {
+    padding: 15px;
+  }
+  
+  .video-info p {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-video-wrapper {
+    padding: 10px;
+  }
+  
+  #video_player {
+    max-height: 300px !important;
+  }
+  
+  .player-controls {
+    padding: 15px;
+  }
+}
